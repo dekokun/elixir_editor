@@ -14,7 +14,10 @@ defmodule ElixirEditor.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [
+      applications: [:cowboy],
+      mod: { ElixirEditor, [] }
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -27,6 +30,10 @@ defmodule ElixirEditor.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+    [
+      {:cowboy, github: "extend/cowboy"},
+      {:jiffy, github: "davisp/jiffy"},
+      {:gproc, github: "uwiger/gproc"}
+    ]
   end
 end
