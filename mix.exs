@@ -16,7 +16,8 @@ defmodule ElixirEditor.Mixfile do
   def application do
     [
       applications: [:cowboy],
-      mod: { ElixirEditor, [] }
+      mod: { ElixirEditor, [] },
+      env: [{:http_port, 8001}]
     ]
   end
 

@@ -34,8 +34,9 @@ defmodule ElixirEditor do
   def port() do
     case :os.getenv("PORT") do
       false ->
-        {:ok, Port} = :application.get_env(:http_port)
-        Port
+      :io.format('~w', [:application.get_env(:http_port)])
+        {:ok, port} = :application.get_env(:http_port)
+        port
       other ->
         :erlang.list_to_integer(other)
     end
