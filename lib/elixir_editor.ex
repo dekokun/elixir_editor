@@ -24,7 +24,7 @@ defmodule ElixirEditor do
       [
         {:env, [{:dispatch, dispatch}]}
       ])
-    :message_wall_sup.start_link()
+    MessageWallSup.start_link()
   end
 
   def stop(_State) do
