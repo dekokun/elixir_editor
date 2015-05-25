@@ -38,7 +38,6 @@ defmodule MessageWallHandler do
     # JSONを返す
     {:reply, {:text, jsonResponse}, req, state}
   end
-
   # get_markdown以外のメッセージの扱い
   def websocket_handle({:text, text}, req, state) do
     room_id = state[:room_id]
@@ -58,8 +57,6 @@ defmodule MessageWallHandler do
     :gproc_ps.publish(:l, :new_message, {room_id, fromGuid})
     {:ok, req, state}
   end
-
-
   def websocket_handle({:binary, data}, req, state) do
     {:reply, {:binary, data}, req, state}
   end
