@@ -104,16 +104,6 @@ defmodule MessageWallHandler do
     :unicode.characters_to_binary(markdown)
   end
 
-  # IPタプルを文字列に変換
-  # format_ip({I1,I2,I3,I4}) ->
-  #   io_lib:format("~w.~w.~w.~w",[I1,I2,I3,I4]);
-  # format_ip(Ip) -> Ip.
-
-  # erlangのdatetimeをISO8601形式に変換
-  # iso8601(Time) ->
-  #   {{Year, Month, Day},{Hour, Minut, Second}} = calendar:now_to_universal_time(Time),
-  #   io_lib:format("~4..0B-~2..0B-~2..0BT~2..0B:~2..0B:~2..0BZ", [Year, Month, Day, Hour, Minut, Second]).
-
   # ETSにメッセージを保存する
   def save_message(key, markdown) do
     :ets.insert(:message_wall, {key, markdown})
