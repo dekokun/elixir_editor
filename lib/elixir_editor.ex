@@ -1,4 +1,6 @@
 defmodule ElixirEditor do
+  @moduledoc false
+
   def start(_type, _args) do
 
     :ets.new(:message_wall, [:set, :named_table, :public])

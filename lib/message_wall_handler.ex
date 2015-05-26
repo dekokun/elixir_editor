@@ -1,4 +1,8 @@
 defmodule MessageWallHandler do
+  @moduledoc """
+  接続をwebsocketにupgradeし、メッセージのやりとりを行う
+  """
+
   @behaviour :cowboy_websocket_handler
 
   def init(_, _, _) do

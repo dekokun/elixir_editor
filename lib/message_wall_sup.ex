@@ -1,4 +1,6 @@
 defmodule MessageWallSup do
+  @moduledoc false
+
   @behaviour :supervisor
 
   def start_link() do
