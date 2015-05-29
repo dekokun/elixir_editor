@@ -33,7 +33,7 @@ defmodule ElixirEditor do
     :ok
   end
 
-  def port() do
+  defp port() do
     case :os.getenv("PORT") do
       false ->
       :io.format('~w', [:application.get_env(:http_port)])

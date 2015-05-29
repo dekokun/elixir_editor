@@ -91,7 +91,7 @@ defmodule MessageWallHandler do
   end
 
   # 対応するmarkdownを取得する
-  def get_markdown(id) do
+  defp get_markdown(id) do
     case :ets.lookup(:message_wall, id) do
       [] -> {id, <<"">>}
       [Tuple] -> Tuple
@@ -99,22 +99,22 @@ defmodule MessageWallHandler do
   end
 
   # ETS結果メッセージをJiffyが変換できる形式に変更
-  def format_markdown({_id, markdown}) do
+  defp format_markdown({_id, markdown}) do
     markdown
   end
 
   # ETS結果メッセージをJiffyが変換できる形式に変更
-  def format_message({_key, markdown}) do
+  defp format_message({_key, markdown}) do
     :unicode.characters_to_binary(markdown)
   end
 
   # ETSにメッセージを保存する
-  def save_message(key, markdown) do
+  defp save_message(key, markdown) do
     :ets.insert(:message_wall, {key, markdown})
   end
 
   # IP取得
-  def get_ip(req) do
+  defp get_ip(req) do
     # プロキシ経由対応
     case :cowboy_req.header(<<"x-real-ip">>, req) do
       {:undefined, _req} ->
