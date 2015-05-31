@@ -29,6 +29,10 @@ defmodule ElixirEditor do
     MessageWallSup.start_link()
   end
 
+  @doc """
+    iex(1)> ElixirEditor.stop(1)
+    :ok
+  """
   def stop(_State) do
     :ok
   end
