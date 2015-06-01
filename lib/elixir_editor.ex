@@ -34,6 +34,8 @@ defmodule ElixirEditor do
     :ok
   """
   def stop(_State) do
+    :ets.delete(:message_wall)
+    :cowboy.stop_listener(:http)
     :ok
   end
 
