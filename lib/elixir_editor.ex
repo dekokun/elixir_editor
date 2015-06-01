@@ -42,8 +42,12 @@ defmodule ElixirEditor do
   defp port() do
     case :os.getenv("PORT") do
       false ->
-        {:ok, port} = :application.get_env(:http_port)
-        port
+        case :application.get_env(:http_port) do
+        {:ok, port} ->
+          port
+        :undefined ->
+          8080
+        end
       other ->
         :erlang.list_to_integer(other)
     end
