@@ -15,7 +15,7 @@ defmodule ElixirEditor.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [
-      applications: [:cowboy],
+      applications: [:cowboy, :gproc],
       mod: { ElixirEditor, [] },
       env: [{:http_port, 8001}]
     ]
