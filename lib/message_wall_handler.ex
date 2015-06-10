@@ -15,13 +15,13 @@ defmodule MessageWallHandler do
     :gproc_ps.subscribe(:l, :new_message)
     # stateを設定する
     ip = get_ip(req)
-    {UserAgent, _Req} = :cowboy_req.header(<<"user-agent">>, req)
-    state = %State{ip: ip, ua: UserAgent, room_id: 1}
+    {userAgent, _Req} = :cowboy_req.header(<<"user-agent">>, req)
+    state = %State{ip: ip, ua: userAgent, room_id: 1}
     # WebSocketリクエストは長くなる可能性があるため
     # 不要なデータをReqから削除
-    Req2 = :cowboy_req.compact(req)
+    compactedReq = :cowboy_req.compact(req)
     # 自動切断を10分に設定する（60万ミリ秒）
-    {:ok, Req2, state, 600000, :hibernate}
+    {:ok, compactedReq, state, 600000, :hibernate}
   end
 
   # get_markdownメッセージの場合はメッセージのリストを返します
@@ -118,9 +118,9 @@ defmodule MessageWallHandler do
     # プロキシ経由対応
     case :cowboy_req.header(<<"x-real-ip">>, req) do
       {:undefined, _req} ->
-        {{Ip, _port}, _req} = :cowboy_req.peer(req)
-        Ip
-      {Ip, _req} -> Ip
+        {{ip, _port}, _req} = :cowboy_req.peer(req)
+        ip
+      {ip, _req} -> ip
     end
   end
 end
