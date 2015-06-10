@@ -18,7 +18,7 @@ defmodule ElixirEditor do
           [:filename.dirname(:code.which(__MODULE__)),
             "..", "priv", "flex.css"])}},
         # /websocketのリクエストをws_handlerに渡す
-        {"/websocket", :MessageWallHandler, []}
+        {"/websocket", MessageWallHandler, []}
       ]}
     ])
     {:ok, _} = :cowboy.start_http(:http, 100,
