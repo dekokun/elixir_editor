@@ -29,9 +29,9 @@ defmodule MessageWallHandler do
     room_id = state.room_id
     :io.format("get_markdownですよ~n")
     # 最新のメッセージを取得する
-    Tuple = get_markdown(room_id)
+    tuple = get_markdown(room_id)
     # メッセージをJiffyが変換できる形式に変更
-    markdown = format_markdown(Tuple)
+    markdown = format_markdown(tuple)
     :io.format("dataですよ ~w~n", [markdown])
     # JiffyでJsonレスポンスを生成
     jsonResponse = :jiffy.encode(%{
@@ -45,7 +45,7 @@ defmodule MessageWallHandler do
   # get_markdown以外のメッセージの扱い
   def websocket_handle({:text, text}, req, state) do
     room_id = state.room_id
-    {[{<<"set_markdown">>, RawMarkdown}, {<<"from">>, fromGuid}|_]} = :jiffy.decode(text)
+    {[{<<"set_markdown">>, rawMarkdown}, {<<"from">>, fromGuid}|_]} = :jiffy.decode(text)
 
     markdown =
     if RawMarkdown === <<>> do
@@ -94,7 +94,7 @@ defmodule MessageWallHandler do
   defp get_markdown(id) do
     case :ets.lookup(:message_wall, id) do
       [] -> {id, <<"">>}
-      [Tuple] -> Tuple
+      [tuple] -> tuple
     end
   end
 
