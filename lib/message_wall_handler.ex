@@ -26,7 +26,7 @@ defmodule MessageWallHandler do
 
   # get_markdownメッセージの場合はメッセージのリストを返します
   def websocket_handle({:text, <<"\"get_markdown\"">>}, req, state) do
-    room_id = state[:room_id]
+    room_id = state.room_id
     :io.format("get_markdownですよ~n")
     # 最新のメッセージを取得する
     Tuple = get_markdown(room_id)
@@ -44,7 +44,7 @@ defmodule MessageWallHandler do
   end
   # get_markdown以外のメッセージの扱い
   def websocket_handle({:text, text}, req, state) do
-    room_id = state[:room_id]
+    room_id = state.room_id
     {[{<<"set_markdown">>, RawMarkdown}, {<<"from">>, fromGuid}|_]} = :jiffy.decode(text)
 
     markdown =
