@@ -24,6 +24,11 @@ defmodule MessageWallHandler do
     {:ok, compactedReq, state, 600000, :hibernate}
   end
 
+  @doc """
+    iex(1)> {:reply, {:text, json}, _room_id, _state} = MessageWallHandler.websocket_handle({:text, <<"\\"get_markdown\\"">>}, 1, %State{ip: "0.0.0.0", ua: "hoge", room_id: 1})
+    iex(2)> :jiffy.decode(json)
+    {[{"type", "all"}, {"markdown", ""}]}
+  """
   # get_markdownメッセージの場合はメッセージのリストを返します
   def websocket_handle({:text, <<"\"get_markdown\"">>}, req, state) do
     room_id = state.room_id
