@@ -27,18 +27,15 @@ defmodule MessageWallHandler do
   # get_markdownメッセージの場合はメッセージのリストを返します
   def websocket_handle({:text, <<"\"get_markdown\"">>}, req, state) do
     room_id = state.room_id
-    :io.format("get_markdownですよ~n")
     # 最新のメッセージを取得する
     tuple = get_markdown(room_id)
     # メッセージをJiffyが変換できる形式に変更
     markdown = format_markdown(tuple)
-    :io.format("dataですよ ~w~n", [markdown])
     # JiffyでJsonレスポンスを生成
     jsonResponse = :jiffy.encode(%{
       <<"type">> => <<"all">>,
       <<"markdown">> => markdown
     })
-    :io.format("responceですよ ~s~n", [jsonResponse])
     # JSONを返す
     {:reply, {:text, jsonResponse}, req, state}
   end
